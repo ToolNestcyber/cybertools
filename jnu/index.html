@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Jaipur National University Portal</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: url('https://i.ibb.co/bMzpXXxd/522imguf-career.webp') no-repeat center center/cover;
+      height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    .login-box {
+      position: absolute;
+      top: 50%;
+      right: 10%;
+      transform: translateY(-50%);
+      background-color: rgba(255, 255, 255, 0.95);
+      padding: 30px;
+      border-radius: 8px;
+      width: 320px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+      z-index: 10;
+    }
+
+    .login-box label {
+      display: block;
+      margin-bottom: 5px;
+      color: #111;
+      font-weight: bold;
+    }
+
+    .login-box input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 20px;
+      border: 1px solid #e91e63;
+      border-radius: 4px;
+      outline: none;
+      background-color: #fff;
+      color: #444;
+      font-size: 14px;
+    }
+
+    .login-box button {
+      width: 100%;
+      background-color: #e91e63;
+      color: #fff;
+      padding: 12px;
+      font-size: 16px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .login-box button:hover {
+      background-color: #d81b60;
+    }
+
+    .login-box .reset {
+      margin-top: 12px;
+      font-size: 14px;
+      text-align: center;
+      color: #111;
+      cursor: pointer;
+    }
+
+    .apps {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    .apps img {
+      height: 40px;
+    }
+
+    .info-box {
+      position: absolute;
+      bottom: 25%;
+      left: 4%;
+      background: rgba(255, 255, 255, 0.85);
+      padding: 25px;
+      max-width: 550px;
+      border-radius: 8px;
+      color: #000;
+      z-index: 5;
+    }
+
+    .info-box h1 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .info-box p {
+      color: #333;
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    /* Responsive for tablets & phones */
+    @media (max-width: 768px) {
+      body {
+        height: 100vh;
+        padding: 0;
+        background: url('https://i.ibb.co/bMzpXXxd/522imguf-career.webp') no-repeat center center/cover;
+        background-size: cover;
+        background-position: center center;
+      }
+
+      .login-box {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 90%;
+        max-width: 320px;
+        padding: 30px;
+        border-radius: 8px;
+        background-color: rgba(255, 255, 255, 0.95);
+        transform: translate(-50%, -50%);
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        z-index: 10;
+      }
+
+      .info-box {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-box">
+    <form method="POST" action="/">
+      <label>User ID</label>
+      <input type="text" name="userid" placeholder="Enter your Username/E-mail/Login id" required />
+
+      <label>Password</label>
+      <input type="password" name="password" placeholder="Enter Password" required />
+
+      <button type="submit">Login</button>
+    </form>
+
+    <div class="reset">
+      Reset password?
+    </div>
+
+    <div class="apps">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Google Play" />
+      <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="App Store" />
+    </div>
+  </div>
+
+  <div class="info-box">
+    <h1>Welcome To The Jaipur National University</h1>
+    <p>
+      An exceptional user friendly platform which offers an online connection between all the stakeholders
+      of the university. Based on enterprising web portal technology, it truly automates various
+      administrative and academic processes of university by reducing the communication distance by
+      providing 24X7 accessibility through its various useful features.
+    </p>
+  </div>
+
+</body>
+</html>

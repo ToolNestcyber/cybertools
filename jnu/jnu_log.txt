@@ -1,0 +1,14 @@
+JNU Credentials Captured:
+Time: 2025-06-03 04:32:25
+IP: 2405:201:5c1f:188a:bcea:a55c:4501:5375
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10) AppleWebKit/619.1 (KHTML, like Gecko) Version/16.0 Safari/619.1
+UserID: r45678
+Password: qw
+------------------------------
+JNU Credentials Captured:
+Time: 2025-06-03 05:03:03
+IP: 103.87.58.132
+User-Agent: Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Mobile Safari/537.36
+UserID: R53503
+Password: jnu79
+------------------------------

